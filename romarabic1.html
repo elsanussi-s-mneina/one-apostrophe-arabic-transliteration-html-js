@@ -129,6 +129,8 @@
 			,[',', '\u060c'] // ARABIC COMMA
 			,[';', '\u061b'] // ARABIC SEMICOLON
 			,['?', '\u061f'] // ARABIC QUESTION MARK
+			,['.', '.'] // Preserve the FULL STOP character. I.e. do not convert it to the ARABIC DECIMAL SEPARATOR indiscriminantly.
+			,['.', '\u066b'] // ARABIC DECIMAL SEPARATOR
 			];
 		const LATIN_COLUMN = 0;
 		const ARABIC_COLUMN = 1;
