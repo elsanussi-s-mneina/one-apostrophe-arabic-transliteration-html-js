@@ -32,46 +32,85 @@
 
 		const transliterationTable = 
 			[
-			["y'i", '\u0625\u0650'] // ARABIC LETTER ALEF WITH HAMZA BELOW followed by ARABIC KASRA
+			["y'y'i", '\u0625\u0651\u0650'] // ARABIC LETTER ALEF WITH HAMZA BELOW followed by ARABIC SHADDA and ARABIC KASRA
+			,["y'i", '\u0625\u0650'] // ARABIC LETTER ALEF WITH HAMZA BELOW followed by ARABIC KASRA
+			,["y'y'i", '\u0625\u0651'] // ARABIC LETTER ALEF WITH HAMZA BELOW then ARABIC SHADDA
 			,["y'i", '\u0625'] // ARABIC LETTER ALEF WITH HAMZA BELOW
 			,["y'aa", '\u0622'] // ARABIC LETTER ALEF WITH MADDA ABOVE
+			,["y'y'", '\u0623\u0651'] // ARABIC LETTER ALEF WITH HAMZA ABOVE then ARABIC SHADDA
 			,["y'", '\u0623'] // ARABIC LETTER ALEF WITH HAMZA ABOVE
+			,["y'y'", '\u0621\u0651'] // ARABIC LETTER HAMZA then ARABIC SHADDA
 			,["y'", '\u0621'] // ARABIC LETTER HAMZA
+			,["y'y'", '\u0624\u0651'] // ARABIC LETTER WAW WITH HAMZA ABOVE then ARABIC SHADDA
 			,["y'", '\u0624'] // ARABIC LETTER WAW WITH HAMZA ABOVE
+			,["y'y'", '\u0626\u0651'] // ARABIC LETTER YEH WITH HAMZA ABOVE then ARABIC SHADDA
 			,["y'", '\u0626'] // ARABIC LETTER YEH WITH HAMZA ABOVE
 			,["aa", '\u064e\u0627'] // ARABIC FATHA then ARABIC LETTER ALEF
 			,["aa", '\u064e\u0649'] // ARABIC FATHA then ARABIC LETTER ALEF MAKSURA
 			,["aa", '\u0649'] // ARABIC LETTER ALEF MAKSURA
+			,["bb", '\u0628\u0651'] // ARABIC LETTER BEH then SHADDA
 			,["b", '\u0628'] // ARABIC LETTER BEH
+			,["-tt", '\u0629\u0651'] // ARABIC LETTER TEH MARBUTA then SHADDA (this never happens in Standard Arabic but we support it for consistency sake.)
 			,["-t", '\u0629'] // ARABIC LETTER TEH MARBUTA
+			,["t't'", '\u0637\u0651'] // ARABIC LETTER TAH then ARABIC SHADDA
 			,["t'", '\u0637'] // ARABIC LETTER TAH
+			,["th'h'", '\u062b\u062d\u0651'] // ARABIC LETTER TEH then ARABIC LETTER HAH then ARABIC SHADDA
 			,["th'", '\u062b\u062d'] // ARABIC LETTER TEH then ARABIC LETTER HAH
+			,["thth", '\u062b\u0651'] // ARABIC LETTER THEH then SHADDA
 			,["th", '\u062b'] // ARABIC LETTER THEH
+			,["tt", '\u062a\u0651'] // ARABIC LETTER TEH then ARABIC SHADDA
 			,["t", '\u062a'] // ARABIC LETTER TEH
+			,["jj", '\u062c\u0651'] // ARABIC LETTER JEEM then ARABIC SHADDA
 			,["j", '\u062c'] // ARABIC LETTER JEEM
+			,["h'h'", '\u062d\u0651'] // ARABIC LETTER HAH the ARABIC SHADDA
 			,["h'", '\u062d'] // ARABIC LETTER HAH
+			,["kh'h'", '\u0643\u062d\u0651'] // ARABIC LETTER KAF then ARABIC LETTER HAH then ARABIC SHADDA
+			,["kh'", '\u0643\u062d'] // ARABIC LETTER KAF then ARABIC LETTER HAH
+			,["khkh", '\u062e\u0651'] // ARABIC LETTER KHAH then ARABIC SHADDA
 			,["kh", '\u062e'] // ARABIC LETTER KHAH
+			,["dh'h'", '\u062f\u062d\u0651'] // ARABIC LETTER DAL then ARABIC LETTER HAH then ARABIC SHADDA
 			,["dh'", '\u062f\u062d'] // ARABIC LETTER DAL then ARABIC LETTER HAH
+			,["dhdh", '\u0630\u0651'] // ARABIC LETTER DHAL then ARABIC SHADDA
 			,["dh", '\u0630'] // ARABIC LETTER DHAL
+			,["d'd'", '\u0636\u0651'] // ARABIC LETTER DAD then ARABIC SHADDA
 			,["d'", '\u0636'] // ARABIC LETTER DAD
+			,["dd", '\u062f\u0651'] // ARABIC LETTER DAL then ARABIC SHADDA
 			,["d", '\u062f'] // ARABIC LETTER DAL
+			,["rr", '\u0631\u0651'] // ARABIC LETTER REH then ARABIC SHADDA
 			,["r", '\u0631'] // ARABIC LETTER REH
+			,["z'z'", '\u0638\u0651'] // ARABIC LETTER ZAH then ARABIC SHADDA
 			,["z'", '\u0638'] // ARABIC LETTER ZAH
+			,["zz", '\u0632\u0651'] // ARABIC LETTER ZAIN then ARABIC SHADDA
 			,["z", '\u0632'] // ARABIC LETTER ZAIN
+			,["sh'h'", '\u0633\u062d\u0651'] // ARABIC LETTER SHEEN then ARABIC LETTER HAH then ARABIC SHADDA
 			,["sh'", '\u0633\u062d'] // ARABIC LETTER SHEEN then ARABIC LETTER HAH
+			,["shsh", '\u0634\u0651'] // ARABIC LETTER SHEEN then ARABIC SHADDA
 			,["sh", '\u0634'] // ARABIC LETTER SHEEN
+			,["s's'", '\u0635\u0651'] // ARABIC LETTER SAD then ARABIC SHADDA
 			,["s'", '\u0635'] // ARABIC LETTER SAD
+			,["ss", '\u0633\u0651'] // ARABIC LETTER SEEN then ARABIC SHADDA
 			,["s", '\u0633'] // ARABIC LETTER SEEN
+			,["a'a'", '\u0639\u0651'] // ARABIC LETTER AIN then ARABIC SHADDA
 			,["a'", '\u0639'] // ARABIC LETTER AIN
+			,["ghgh", '\u063a\u0651'] // ARABIC LETTER GHAIN then ARABIC SHADDA
 			,["gh", '\u063a'] // ARABIC LETTER GHAIN
+			,["ff", '\u0641\u0651'] // ARABIC LETTER FEH then ARABIC SHADDA
 			,["f", '\u0641'] // ARABIC LETTER FEH
+			,["qq", '\u0642\u0651'] // ARABIC LETTER QAF then ARABIC SHADDA
 			,["q", '\u0642'] // ARABIC LETTER QAF
+			,["kk", '\u0643\u0651'] // ARABIC LETTER KAF then ARABIC SHADDA
 			,["k", '\u0643'] // ARABIC LETTER KAF
+			,["ll", '\u0644\u0651'] // ARABIC LETTER LAM then ARABIC SHADDA
 			,["l", '\u0644'] // ARABIC LETTER LAM
+			,["mm", '\u0645\u0651'] // ARABIC LETTER MEEM then ARABIC SHADDA
 			,["m", '\u0645'] // ARABIC LETTER MEEM
+			,["nn", '\u0646\u0651'] // ARABIC LETTER NOON then ARABIC SHADDA
 			,["n", '\u0646'] // ARABIC LETTER NOON
+			,["hh", '\u0647\u0651'] // ARABIC LETTER HEH then ARABIC SHADDA
 			,["h", '\u0647'] // ARABIC LETTER HEH
+			,["ww", '\u0648\u0651'] // ARABIC LETTER WAW then ARABIC SHADDA
 			,["w", '\u0648'] // ARABIC LETTER WAW
+			,["yy", '\u064a\u0651'] // ARABIC LETTER YEH then ARABIC SHADDA
 			,["y", '\u064a'] // ARABIC LETTER YEH
 			,["a-n", '\u064b'] // ARABIC FATHATAN
 			,["u-n", '\u064c'] // ARABIC DAMMATAN
