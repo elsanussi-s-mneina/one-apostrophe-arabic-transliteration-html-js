@@ -19,11 +19,13 @@
 	</div>
 	<script>
 		const transliterationTable = 
-			[["y'", '\u0623'] // ARABIC LETTER ALEF WITH HAMZA ABOVE
+			[
+			["y'i", '\u0625\u0650'] // ARABIC LETTER ALEF WITH HAMZA BELOW followed by ARABIC KASRA
+			,["y'i", '\u0625'] // ARABIC LETTER ALEF WITH HAMZA BELOW
+			,["y'aa", '\u0622'] // ARABIC LETTER ALEF WITH MADDA ABOVE
+			,["y'", '\u0623'] // ARABIC LETTER ALEF WITH HAMZA ABOVE
 			,["y'", '\u0621'] // ARABIC LETTER HAMZA
 			,["y'", '\u0624'] // ARABIC LETTER WAW WITH HAMZA ABOVE
-			,["y'i", '\u0625\u0650'] // ARABIC LETTER ALEF WITH HAMZA BELOW followed by ARABIC KASRA
-			,["y'i", '\u0625'] // ARABIC LETTER ALEF WITH HAMZA BELOW
 			,["y'", '\u0626'] // ARABIC LETTER YEH WITH HAMZA ABOVE
 			];
 		const LATIN_COLUMN = 0;
