@@ -40,14 +40,32 @@
 
 		function romanizeText(arabicText)
 		{
-			// to be implemented.
-			return arabicText
+			var latinText = "";
+			var index = 0;
+
+			while (index < arabicText.length)
+			{
+				// to be implemented.
+				latinText += arabicText.charAt(index);
+				index += 1;
+			}
+
+			return latinText;
 		}
 
 		function arabizeText(latinText)
 		{
-			// to be implemented.
-			return latinText
+			var arabicText = "";
+			var index = 0;
+
+			while (index < latinText.length)
+			{
+				// to be implemented.
+				arabicText += latinText.charAt(index);
+				index += 1;
+			}
+
+			return arabicText;
 		}
 
 		function romanize()
