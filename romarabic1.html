@@ -17,6 +17,11 @@
 		<textarea id='latinScriptText' dir="ltr" lang="en" aria-live="assertive"></textarea>
 		<input type='button' id='arabizeButton' value="Convert to Arabic Script"/>
 	</div>
+	<input type='button' id='startDeveloperModeButton'value ="Start Developer Mode"/>
+	<div id="developerPanel" style="visibility: collapse;">
+		<input type='button' id='testButton' value="Run Unit Tests"/>
+		<div id="testResultLabel"></div>
+	</div>
 	<script>
 		const transliterationTable = 
 			[
@@ -135,8 +140,26 @@
 			setArabicText(arabicText);
 		}
 
+		function startDeveloperMode()
+		{
+			document.getElementById('developerPanel').style = "visibility: visible;";
+		}
+		function getUnitTestResults()
+		{
+			return 'Unit tests are not implemented yet.';
+		}
+
+		function runUnitTests()
+		{
+			document.getElementById('testResultLabel').innerText = getUnitTestResults();
+		}
+
 		document.getElementById('romanizeButton').onclick = romanize;
 		document.getElementById('arabizeButton').onclick = arabize;
+
+		document.getElementById('startDeveloperModeButton').onclick = startDeveloperMode;
+
+		document.getElementById('testButton').onclick = runUnitTests;
 	</script>
 </body>
 </html>
