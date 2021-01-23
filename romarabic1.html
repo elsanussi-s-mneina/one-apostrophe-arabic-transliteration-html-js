@@ -15,9 +15,14 @@
 	<div>
 		<label for='latinScriptText'>Put text in Latin script here.</label>
 		<textarea id='latinScriptText' dir="ltr" lang="en" aria-live="assertive"></textarea>
-		<input type='button'  id='arabizeButton' value="Convert to Arabic Script"/>
+		<input type='button' id='arabizeButton' value="Convert to Arabic Script"/>
 	</div>
 	<script>
+		function setArabicText(text)
+		{
+			document.getElementById('arabicScriptText').value = text;
+		}
+
 		function getArabicText()
 		{
 			return document.getElementById('arabicScriptText').value;
@@ -28,13 +33,39 @@
 			document.getElementById('latinScriptText').value = text;
 		}
 
+		function getLatinText()
+		{
+			return document.getElementById('latinScriptText').value;
+		}
+
+		function romanizeText(arabicText)
+		{
+			// to be implemented.
+			return arabicText
+		}
+
+		function arabizeText(latinText)
+		{
+			// to be implemented.
+			return latinText
+		}
+
 		function romanize()
 		{
 			var arabicText = getArabicText();
-			var latinText = arabicText;
+			var latinText = romanizeText(arabicText);
 			setLatinText(latinText)
 		}
+
+		function arabize()
+		{
+			var latinText = getLatinText();
+			var arabicText = arabizeText(latinText);
+			setArabicText(arabicText);
+		}
+
 		document.getElementById('romanizeButton').onclick = romanize;
+		document.getElementById('arabizeButton').onclick = arabize;
 	</script>
 </body>
 </html>
