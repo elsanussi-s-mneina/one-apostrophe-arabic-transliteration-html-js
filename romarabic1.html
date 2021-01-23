@@ -23,6 +23,13 @@
 		<div id="testResultLabel"></div>
 	</div>
 	<script>
+		// pre-romanization exclusion characters are arabic characters that must be deleted before
+		// romanization is started. They have no use in the Latin script.
+		const preRomanizationExclusions = 
+			[
+			'\u0640' // ARABIC TATWEEL
+			];
+
 		const transliterationTable = 
 			[
 			["y'i", '\u0625\u0650'] // ARABIC LETTER ALEF WITH HAMZA BELOW followed by ARABIC KASRA
@@ -120,9 +127,19 @@
 			return [latinText.charAt(0), latinText.substring(1)];
 		}
 
+		function romanizationPreprocessing(text)
+		{
+			for (var i = 0; i < preRomanizationExclusions.length; i++)
+			{
+				text = text.replaceAll(preRomanizationExclusions[i], '');
+			}
+			return text;
+		}
+
 		function romanizeText(arabicText)
 		{
 			var latinText = "";
+			arabicText = romanizationPreprocessing(arabicText)
 
 			while (arabicText.length > 0)
 			{
