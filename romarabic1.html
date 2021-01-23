@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>One Apostrophe Arabic Transliteration</title>
+</head>
+<body>
+	<h1>Arabic to Latin Transliteration</h1>
+	<h2>Under construction nothing works yet.</h2>
+	<div id='arabicScriptRegion'>
+		<label for='arabicScriptText'>Put text in Arabic script here.</label>
+		<textarea id='arabicScriptText' dir="rtl" lang="ar" aria-live="assertive"></textarea>
+		<input type='button' id='romanizeButton' value="Convert to Latin Script"/> sanaam - fat on back of camel
+	</div>
+	<div>
+		<label for='latinScriptText'>Put text in Latin script here.</label>
+		<textarea id='latinScriptText' dir="ltr" lang="en" aria-live="assertive"></textarea>
+		<input type='button'  id='arabizeButton' value="Convert to Arabic Script"/>
+	</div>
+	<script>
+		function getArabicText()
+		{
+			return document.getElementById('arabicScriptText').value;
+		}
+
+		function setLatinText(text)
+		{
+			document.getElementById('latinScriptText').value = text;
+		}
+
+		function romanize()
+		{
+			var arabicText = getArabicText();
+			var latinText = arabicText;
+			setLatinText(latinText)
+		}
+		document.getElementById('romanizeButton').onclick = romanize;
+	</script>
+</body>
+</html>
