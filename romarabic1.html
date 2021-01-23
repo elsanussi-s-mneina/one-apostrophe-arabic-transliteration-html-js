@@ -38,16 +38,50 @@
 			return document.getElementById('latinScriptText').value;
 		}
 
+		function romanizeNextChunk(arabicText)
+		{
+			if (arabicText.startsWith('\u0623'))
+			{
+				// If the arabic text starts with
+				// ARABIC LETTER ALEF WITH HAMZA ABOVE
+				// then transliterate it
+				// to LATIN SMALL LETTER followed by APOSTROPHE.
+
+				// Also return the rest of the Arabic text.
+				return ["y'", arabicText.substring('\u0623'.length)];
+			}
+			else
+			{
+				// return the next character as is, and everything else
+				return [arabicText.charAt(0), arabicText.substring(1)];
+			}
+		}
+
+		function arabizeNextChunk(latinText)
+		{
+			if (latinText.startsWith("y'"))
+			{
+				// to ARABIC LETTER ALEF WITH HAMZA ABOVE
+
+				// Also return the rest of the Latin text.
+				return ['\u0623', latinText.substring("y'".length)];
+			}
+			else
+			{
+				// return the next character as is, and everything else
+				return [latinText.charAt(0), latinText.substring(1)];
+			}
+		}
+
 		function romanizeText(arabicText)
 		{
 			var latinText = "";
-			var index = 0;
 
-			while (index < arabicText.length)
+			while (arabicText.length > 0)
 			{
-				// to be implemented.
-				latinText += arabicText.charAt(index);
-				index += 1;
+				var chunk = romanizeNextChunk(arabicText);
+				latinText += chunk[0];
+				arabicText = chunk[1];
 			}
 
 			return latinText;
@@ -56,13 +90,12 @@
 		function arabizeText(latinText)
 		{
 			var arabicText = "";
-			var index = 0;
 
-			while (index < latinText.length)
+			while (latinText.length > 0)
 			{
-				// to be implemented.
-				arabicText += latinText.charAt(index);
-				index += 1;
+				var chunk = arabizeNextChunk(latinText);
+				arabicText += chunk[0];
+				latinText = chunk[1];
 			}
 
 			return arabicText;
