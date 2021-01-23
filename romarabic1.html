@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h1>Arabic to Latin Transliteration</h1>
-	<h2>Under construction nothing works yet.</h2>
+	<h2>Under construction little works yet.</h2>
 	<div id='arabicScriptRegion'>
 		<label for='arabicScriptText'>Put text in Arabic script here.</label>
 		<textarea id='arabicScriptText' dir="rtl" lang="ar" aria-live="assertive"></textarea>
@@ -18,6 +18,11 @@
 		<input type='button' id='arabizeButton' value="Convert to Arabic Script"/>
 	</div>
 	<script>
+		const transliterationTable = [["y'", '\u0623']];	// ARABIC LETTER ALEF WITH HAMZA ABOVE
+
+		const LATIN_COLUMN = 0;
+		const ARABIC_COLUMN = 1;
+
 		function setArabicText(text)
 		{
 			document.getElementById('arabicScriptText').value = text;
@@ -40,37 +45,40 @@
 
 		function romanizeNextChunk(arabicText)
 		{
-			if (arabicText.startsWith('\u0623'))
+			for (var i = 0; i < transliterationTable.length; i++)
 			{
-				// If the arabic text starts with
-				// ARABIC LETTER ALEF WITH HAMZA ABOVE
-				// then transliterate it
-				// to LATIN SMALL LETTER followed by APOSTROPHE.
+				const arabicChunk = transliterationTable[i][ARABIC_COLUMN];
+				const latinChunk = transliterationTable[i][LATIN_COLUMN];
 
-				// Also return the rest of the Arabic text.
-				return ["y'", arabicText.substring('\u0623'.length)];
+				if (arabicText.startsWith(arabicChunk))
+				{
+					// Transliterate the next arabic chunk.
+					// Also return the rest of the Arabic text.
+					return [latinChunk, arabicText.substring(arabicChunk.length)];
+				}
 			}
-			else
-			{
-				// return the next character as is, and everything else
-				return [arabicText.charAt(0), arabicText.substring(1)];
-			}
+
+			// return the next character as is, and everything else
+			return [arabicText.charAt(0), arabicText.substring(1)];
 		}
 
 		function arabizeNextChunk(latinText)
 		{
-			if (latinText.startsWith("y'"))
+			for (var i = 0; i < transliterationTable.length; i++)
 			{
-				// to ARABIC LETTER ALEF WITH HAMZA ABOVE
+				const arabicChunk = transliterationTable[i][ARABIC_COLUMN];
+				const latinChunk = transliterationTable[i][LATIN_COLUMN];
 
-				// Also return the rest of the Latin text.
-				return ['\u0623', latinText.substring("y'".length)];
+				if (latinText.startsWith(latinChunk))
+				{
+					// Transliterate the next Latin chunk.
+					// Also return the rest of the Latin text.
+					return [arabicChunk, latinText.substring(latinChunk.length)];
+				}
 			}
-			else
-			{
-				// return the next character as is, and everything else
-				return [latinText.charAt(0), latinText.substring(1)];
-			}
+
+			// return the next character as is, and everything else
+			return [latinText.charAt(0), latinText.substring(1)];
 		}
 
 		function romanizeText(arabicText)
