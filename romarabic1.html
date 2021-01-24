@@ -283,8 +283,39 @@
 		function arabize()
 		{
 			var latinText = getLatinText();
-			var arabicText = arabizeText(latinText);
-			setArabicText(arabicText);
+			var arabicText1 = arabizeText(latinText);
+			const arabicText2 = arabizePostprocessing(arabicText1);
+			setArabicText(arabicText2);
+		}
+
+		function addExtraAlefAfterFathatan(text)
+		{
+			// Add ARABIC LETTER ALEF after every ARABIC FATHATAN character
+			var result = text.replaceAll("\u064b", "\u064b\u0627");
+
+			// Remove ARABIC LETTER ALEF in every sequence ... starting with a HAMZA containing characters or ARABIC LETTER TEH MARBUTA.
+
+			const resistantCharacters = 
+			[
+				'\u0629', // ARABIC LETTER TEH MARBUTA
+				'\u0621', // ARABIC LETTER HAMZA
+				'\u0623', // ARABIC LETTER ALEF WITH HAMZA ABOVE
+				'\u0624', // ARABIC LETTER WAW WITH HAMZA ABOVE
+				'\u0625', // ARABIC LETTER ALEF WITH HAMZA BELOW
+				'\u0626', // ARABIC LETTER YEH WITH HAMZA ABOVE
+			];
+
+			for (var i = 0; i < resistantCharacters.length; i++)
+			{
+				const current = resistantCharacters[i];
+				result = result.replaceAll(current + '\u064b\u0627', current + '\u064b');
+			}
+			return result;
+		}
+
+		function arabizePostprocessing(text)
+		{
+			return addExtraAlefAfterFathatan(text);
 		}
 
 		function startDeveloperMode()
