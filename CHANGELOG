@@ -11,3 +11,4 @@ Two text areas and two buttons are placed on a webpage.
 - Fix regression: 'ain was not appearing anymore. Switch to 'e, 
 - Do not allow SUKUN to show up in the result of romanization.
 - Support interpretation of ARABIC LETTER ALEF at beginning of word as ARABIC LETTER ALEF WASLA
+- Handle capital latin letters by first converting them to lowercase before arabization.
