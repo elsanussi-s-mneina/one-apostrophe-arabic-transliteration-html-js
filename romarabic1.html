@@ -76,6 +76,8 @@
 			,["ii", '\u0650\u0656'] // ARABIC KASRA then ARABIC SUBSCRIPT ALEF
 			,["ii", '\u0656'] // ARABIC SUBSCRIPT ALEF
 			,["uu", '\u064f\u0648\u0652'] // ARABIC DAMMA then ARABIC LETTER WAW then ARABIC SUKUN
+			
+
 			,["bb", '\u0628\u0651'] // ARABIC LETTER BEH then SHADDA
 			,["b", '\u0628'] // ARABIC LETTER BEH
 			,["-tt", '\u0629\u0651'] // ARABIC LETTER TEH MARBUTA then SHADDA (this never happens in Standard Arabic but we support it for consistency sake, and because there is no logical reason it should not be possible.)
@@ -149,6 +151,43 @@
 			,["a-n", '\u064b'] // ARABIC FATHATAN
 			,["u-n", '\u064c'] // ARABIC DAMMATAN
 			,["i-n", '\u064d'] // ARABIC KASRATAN
+			
+
+			// prevent long vowel from occurring without a preceding ARABIC LETTER ALEF.
+			,["\raa", '\r\u0627\u064e\u0627'] // ARABIC LETTER ALEF then ARABIC FATHA then ARABIC LETTER ALEF
+			,["\ruu", '\r\u0627\u064f\u0648\u0652'] // ARABIC LETTER ALEF then ARABIC DAMMA then ARABIC LETTER WAW then ARABIC SUKUN
+			,["\rii", '\r\u0627\u0650\u064a\u0652'] // ARABIC LETTER ALEF then ARABIC KASRA then ARABIC LETTER YEH then ARABIC SUKUN
+			
+			,["\naa", '\n\u0627\u064e\u0627'] // ARABIC LETTER ALEF then ARABIC FATHA then ARABIC LETTER ALEF
+			,["\nuu", '\n\u0627\u064f\u0648\u0652'] // ARABIC LETTER ALEF then ARABIC DAMMA then ARABIC LETTER WAW then ARABIC SUKUN
+			,["\nii", '\n\u0627\u0650\u064a\u0652'] // ARABIC LETTER ALEF then ARABIC KASRA then ARABIC LETTER YEH then ARABIC SUKUN
+			
+			,["\taa", '\t\u0627\u064e\u0627'] // ARABIC LETTER ALEF then ARABIC FATHA then ARABIC LETTER ALEF
+			,["\tuu", '\t\u0627\u064f\u0648\u0652'] // ARABIC LETTER ALEF then ARABIC DAMMA then ARABIC LETTER WAW then ARABIC SUKUN
+			,["\tii", '\t\u0627\u0650\u064a\u0652'] // ARABIC LETTER ALEF then ARABIC KASRA then ARABIC LETTER YEH then ARABIC SUKUN
+
+			,[" aa", ' \u0627\u064e\u0627'] // ARABIC LETTER ALEF then ARABIC FATHA then ARABIC LETTER ALEF
+			,[" uu", ' \u0627\u064f\u0648\u0652'] // ARABIC LETTER ALEF then ARABIC DAMMA then ARABIC LETTER WAW then ARABIC SUKUN
+			,[" ii", ' \u0627\u0650\u064a\u0652'] // ARABIC LETTER ALEF then ARABIC KASRA then ARABIC LETTER YEH then ARABIC SUKUN
+
+
+			// prevent short vowel from occurring without a preceding ARABIC LETTER ALEF.
+			,["\ra", '\r\u0627\u064e'] // ARABIC LETTER ALEF then ARABIC FATHA
+			,["\ru", '\r\u0627\u064f'] // ARABIC LETTER ALEF then ARABIC DAMMA
+			,["\ri", '\r\u0627\u0650'] // ARABIC LETTER ALEF then ARABIC KASRA
+			
+			,["\na", '\n\u0627\u064e'] // ARABIC LETTER ALEF then ARABIC FATHA
+			,["\nu", '\n\u0627\u064f'] // ARABIC LETTER ALEF then ARABIC DAMMA
+			,["\ni", '\n\u0627\u0650'] // ARABIC LETTER ALEF then ARABIC KASRA
+			
+			,["\ta", '\t\u0627\u064e'] // ARABIC LETTER ALEF then ARABIC FATHA
+			,["\tu", '\t\u0627\u064f'] // ARABIC LETTER ALEF then ARABIC DAMMA
+			,["\ti", '\t\u0627\u0650'] // ARABIC LETTER ALEF then ARABIC KASRA
+
+			,[" a", ' \u0627\u064e'] // ARABIC LETTER ALEF then ARABIC FATHA
+			,[" u", ' \u0627\u064f'] // ARABIC LETTER ALEF then ARABIC DAMMA
+			,[" i", ' \u0627\u0650'] // ARABIC LETTER ALEF then ARABIC KASRA
+
 			,["a", '\u064e'] // ARABIC FATHA
 			,["u", '\u064f'] // ARABIC DAMMA
 			,["i", '\u0650'] // ARABIC KASRA
@@ -278,14 +317,21 @@
 		function arabizeText(latinText)
 		{
 			var arabicText = "";
-
+			// We add an extra space at the beginning,
+			// because the romanization algorithm needs it.
+			// Otherwise it might not add the necessary alef at
+			// the beginning when the text begins with a vowel.
+			latinText = " " + latinText;
+			
 			while (latinText.length > 0)
 			{
 				var chunk = arabizeNextChunk(latinText);
 				arabicText += chunk[0];
 				latinText = chunk[1];
 			}
-
+			
+			// Remove the extra space we needed.
+			arabicText = arabicText.substring(1);
 			return arabicText;
 		}
 

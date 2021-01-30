@@ -2,3 +2,8 @@
 The project is started after realizing that very few people are technically skilled enough or willing to go through the inconvenience of being able to type romanized Arabic using systems with diacritics in the Latin script.
 
 Two text areas and two buttons are placed on a webpage.
+
+
+2021-01-29:
+- Fix romanization of "kaan", where alef was not being romanized at all.
+- Add ARABIC LETTER ALEF before vowels if no consonant precedes the vowel.
