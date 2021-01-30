@@ -34,7 +34,8 @@
 			
 		const postRomanizationExclusions =
 			[
-			'\u0652' // ARABIC SUKUN
+			'\u0652', // ARABIC SUKUN
+			'\u0653' // ARABIC MADDAH ABOVE
 			];
 
 		const transliterationTable = 
@@ -82,7 +83,9 @@
 			,["ii", '\u0650\u0656'] // ARABIC KASRA then ARABIC SUBSCRIPT ALEF
 			,["ii", '\u0656'] // ARABIC SUBSCRIPT ALEF
 			,["uu", '\u064f\u0648\u0652'] // ARABIC DAMMA then ARABIC LETTER WAW then ARABIC SUKUN
-			
+			,["uu-", '\u064f\u0648\u0652\u0627\u06df'] // ARABIC DAMMA then ARABIC LETTER WAW then ARABIC SUKUN then ARABIC LETTER ALEF then ARABIC SMALL HIGH ROUNDED ZERO
+ 			,["uu-", '\u064f\u0648\u0627\u06df'] // ARABIC DAMMA then ARABIC LETTER WAW then ARABIC LETTER ALEF then ARABIC SMALL HIGH ROUNDED ZERO
+
 
 			,["bb", '\u0628\u0651'] // ARABIC LETTER BEH then SHADDA
 			,["b", '\u0628'] // ARABIC LETTER BEH

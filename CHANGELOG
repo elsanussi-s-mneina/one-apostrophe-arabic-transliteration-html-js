@@ -12,3 +12,5 @@ Two text areas and two buttons are placed on a webpage.
 - Do not allow SUKUN to show up in the result of romanization.
 - Support interpretation of ARABIC LETTER ALEF at beginning of word as ARABIC LETTER ALEF WASLA
 - Handle capital latin letters by first converting them to lowercase before arabization.
+- Remove Arabic high maddah
+- treat silent ALEF at 3rd person plural specially if uses Arabic zero sukun
