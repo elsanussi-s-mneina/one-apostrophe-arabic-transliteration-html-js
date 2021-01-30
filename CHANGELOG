@@ -10,3 +10,4 @@ Two text areas and two buttons are placed on a webpage.
 - Add ability to distinguish between 4 hamza characters.
 - Fix regression: 'ain was not appearing anymore. Switch to 'e, 
 - Do not allow SUKUN to show up in the result of romanization.
+- Support interpretation of ARABIC LETTER ALEF at beginning of word as ARABIC LETTER ALEF WASLA

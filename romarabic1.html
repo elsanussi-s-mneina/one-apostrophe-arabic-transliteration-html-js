@@ -22,7 +22,7 @@
 		<div id="testResultLabel"></div>
 	</div>
 		<footer>
-		<p><a style="font-size: x-small; margin-left: 5em" href="https://github.com/elsanussi-s-mneina/one-apostrophe-arabic-transliteration-html-js">Get source code and documentation: v1.04, (2021-01-29). Made by Elsanussi Mneina</a></p>
+		<p><a style="font-size: x-small; margin-left: 5em" href="https://github.com/elsanussi-s-mneina/one-apostrophe-arabic-transliteration-html-js">Get source code and documentation: v1.05, (2021-01-29). Made by Elsanussi Mneina</a></p>
 		</footer>  
 	<script>
 		// pre-romanization exclusion characters are arabic characters that must be deleted before
@@ -52,6 +52,7 @@
 			,["w'", '\u0624'] // ARABIC LETTER WAW WITH HAMZA ABOVE
 			,["y'y'", '\u0626\u0651'] // ARABIC LETTER YEH WITH HAMZA ABOVE then ARABIC SHADDA
 			,["y'", '\u0626'] // ARABIC LETTER YEH WITH HAMZA ABOVE
+			,["--", '\u0671'] // ARABIC LETTER ALEF WASLA
 
 			// Note: due to the way the digraphs (i.e. sh, th, etc.) use h as a second character
 			// the only way to represent the phoneme /h/ unambiguously in all positions is to add a dash before
@@ -301,6 +302,12 @@
 			{
 				text = text.replaceAll(preRomanizationExclusions[i], '');
 			}
+			
+			// Replace word initial alef with ALEF WASLA.
+			const wordInitialAlef =  /( |\t|\n|\r)\u0627/g;
+			text = text.replaceAll(wordInitialAlef, '$1\u0671');
+			console.log(text);
+			
 			return text;
 		}
 
@@ -310,6 +317,11 @@
 			{
 				text = text.replaceAll(postRomanizationExclusions[i], '');
 			}
+			
+			// Replace word initial alef with ALEF WASLA.
+			const wordInitialAlef =  /( |\t|\n|\r)\u0627/g;
+			text = text.replaceAll(wordInitialAlef, '$1\u0671');
+			console.log(text);
 			return text;
 		}
 
