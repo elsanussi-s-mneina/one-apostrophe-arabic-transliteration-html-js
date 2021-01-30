@@ -7,3 +7,4 @@ Two text areas and two buttons are placed on a webpage.
 2021-01-29:
 - Fix romanization of "kaan", where alef was not being romanized at all.
 - Add ARABIC LETTER ALEF before vowels if no consonant precedes the vowel.
+- Add ability to distinguish between 4 hamza characters.
