@@ -31,6 +31,11 @@
 			[
 			'\u0640' // ARABIC TATWEEL
 			];
+			
+		const postRomanizationExclusions =
+			[
+			'\u0652' // ARABIC SUKUN
+			];
 
 		const transliterationTable = 
 			[
@@ -61,7 +66,7 @@
 
 			,["-h", '\u0647'] // ARABIC LETTER HEH 
 
-			,["e'a'", '\u0639\u0651'] // ARABIC LETTER AIN then ARABIC SHADDA
+			,["e'e'", '\u0639\u0651'] // ARABIC LETTER AIN then ARABIC SHADDA
 			,["e'", '\u0639'] // ARABIC LETTER AIN
 
 			,["aai", '\u064e\u0627\u064a\u0652'] // ARABIC FATHA then ARABIC LETTER ALEF then ARABIC LETTER YEH then ARABIC SUKUN
@@ -69,8 +74,8 @@
 			,["aa", '\u064e\u0670'] // ARABIC FATHA then ARABIC LETTER SUPERSCRIPT ALEF
 			,["aa", '\u0670'] // ARABIC LETTER SUPERSCRIPT ALEF
 			,["aa", '\u0627'] // ARABIC LETTER ALEF
-			,["aa", '\u064e\u0649'] // ARABIC FATHA then ARABIC LETTER ALEF MAKSURA
-			,["aa", '\u0649'] // ARABIC LETTER ALEF MAKSURA
+			,["ee", '\u064e\u0649'] // ARABIC FATHA then ARABIC LETTER ALEF MAKSURA
+			,["ee", '\u0649'] // ARABIC LETTER ALEF MAKSURA
 			,["ai", '\u064e\u064a\u0652'] // ARABIC FATHA then ARABIC LETTER YEH then ARABIC SUKUN
 			,["ii", '\u0650\u064a\u0652'] // ARABIC KASRA then ARABIC LETTER YEH then ARABIC SUKUN
 			,["ii", '\u0650\u0656'] // ARABIC KASRA then ARABIC SUBSCRIPT ALEF
@@ -299,6 +304,15 @@
 			return text;
 		}
 
+		function romanizationPostprocessing(text)
+		{
+			for (var i = 0; i < postRomanizationExclusions.length; i++)
+			{
+				text = text.replaceAll(postRomanizationExclusions[i], '');
+			}
+			return text;
+		}
+
 		function romanizeText(arabicText)
 		{
 			var latinText = "";
@@ -310,7 +324,8 @@
 				latinText += chunk[0];
 				arabicText = chunk[1];
 			}
-
+			
+			latinText = romanizationPostprocessing(latinText);
 			return latinText;
 		}
 

@@ -9,3 +9,4 @@ Two text areas and two buttons are placed on a webpage.
 - Add ARABIC LETTER ALEF before vowels if no consonant precedes the vowel.
 - Add ability to distinguish between 4 hamza characters.
 - Fix regression: 'ain was not appearing anymore. Switch to 'e, 
+- Do not allow SUKUN to show up in the result of romanization.
